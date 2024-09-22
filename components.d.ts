@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     Build: typeof import('./src/components/Build.vue')['default']
     Compile: typeof import('./src/components/Compile.vue')['default']
+    Debounce: typeof import('./src/components/Debounce.vue')['default']
     Editor: typeof import('./src/components/Editor.vue')['default']
     Features: typeof import('./src/components/Features.vue')['default']
     MiscConfig: typeof import('./src/components/MiscConfig.vue')['default']

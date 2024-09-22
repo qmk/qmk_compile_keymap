@@ -1,10 +1,13 @@
 {
   "name": "qmk_compile_keymap",
+  "description": "QMK Compile API Frontend",
   "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 0.0.0.0",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint . --fix --ignore-path .gitignore"
   },
   "dependencies": {
     "@guolao/vue-monaco-editor": "^1.5.4",
@@ -12,7 +15,7 @@
     "@vueuse/core": "^11.1.0",
     "file-saver": "^2.0.5",
     "roboto-fontface": "*",
-    "vue": "^3.4.31",
+    "vue": "^3.4.37",
     "vuetify": "^3.6.11"
   },
   "devDependencies": {
@@ -21,12 +24,20 @@
     "@types/file-saver": "^2.0.7",
     "@types/node": "^20.14.10",
     "@vitejs/plugin-vue": "^5.0.5",
-    "sass": "1.77.6",
-    "typescript": "^5.4.2",
+    "@vue/eslint-config-typescript": "^13.0.0",
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-vue": "^9.22.0",
+    "sass": "^1.71.7 <=1.77.9",
+    "typescript": "^5.4.2 <=5.6.0",
     "unplugin-fonts": "^1.1.1",
     "unplugin-vue-components": "^0.27.2",
-    "vite": "^5.3.3",
-    "vite-plugin-vuetify": "^2.0.3",
+    "vite": "^5.4.1",
+    "vite-plugin-vuetify": "^2.0.4",
     "vue-tsc": "^2.0.26"
   }
 }

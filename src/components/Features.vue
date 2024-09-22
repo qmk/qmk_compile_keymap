@@ -1,7 +1,8 @@
 <template>
-  <v-switch :hide-details="true" label="Extra" v-model="extrakey"/>
-  <v-switch :hide-details="true" label="Mouse" v-model="mousekey"/>
-  <v-switch :hide-details="true" label="VIA" v-model="via"/>
+  <v-switch hide-details label="Bootmagic" v-model="bootmagic"/>
+  <v-switch hide-details label="Extra Keys" v-model="extrakey"/>
+  <v-switch hide-details label="Mouse Keys" v-model="mousekey"/>
+  <v-switch hide-details label="VIA" v-model="via"/>
 </template>
 
 <script lang="ts" setup>
@@ -9,6 +10,17 @@ import { computed } from 'vue'
 import { useKeymapState } from '@/composables/useKeymapState'
 
 const { keymap } = useKeymapState()
+
+const bootmagic = computed({
+  get() {
+    return keymap.value.config?.features?.bootmagic ?? false;
+  },
+  set(val) {
+    keymap.value.config = keymap.value.config || {}
+    keymap.value.config.features = keymap.value.config.features || {}
+    keymap.value.config.features.bootmagic = val;
+  }
+})
 
 const extrakey = computed({
   get() {

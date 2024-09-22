@@ -1,7 +1,6 @@
 <template>
-    <v-switch :hide-details="true" label="Split USB Detect" v-model="usbdetect"/>
-    <v-switch :hide-details="true" label="Split Watchdog" v-model="watchdog"/>
-    <v-select clearable label="Converter" :items="converters"  v-model="converter"></v-select>
+    <v-switch hide-details label="Split USB Detect" v-model="usbdetect"/>
+    <v-switch hide-details label="Split Watchdog" v-model="watchdog"/>
 </template>
 
 <script lang="ts" setup>
@@ -9,24 +8,6 @@ import { computed } from 'vue'
 import { useKeymapState } from '@/composables/useKeymapState'
 
 const { keymap } = useKeymapState()
-
-const converters = [
-    'rp2040_ce', // Probably most common so show first
-
-    'bit_c_pro',
-    'blok',
-    'bonsai_c3',
-    'bonsai_c4',
-    'elite_pi',
-    'helios',
-    'imera',
-    'kb2040',
-    'liatris',
-    'michi',
-    'proton_c',
-    'sparkfun_pm2040',
-    'stemcell',
-]
 
 const usbdetect = computed({
   get() {
@@ -58,19 +39,6 @@ const watchdog = computed({
     } else {
         // TODO: delete actual value and clean up empty parents
         delete keymap.value?.config?.split?.transport
-    }
-  }
-})
-
-const converter = computed({
-  get() {
-    return keymap.value.converter ?? null;
-  },
-  set(val) {
-    if (val) {
-        keymap.value.converter = val;
-    } else {
-        delete keymap.value.converter
     }
   }
 })

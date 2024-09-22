@@ -13,9 +13,9 @@
         <template v-slot:text>
             <p class="text-md-center">Your firmware will be automatically downloaded after the compilation is complete.</p>
             <div class="d-flex justify-center">
-                <v-progress-circular class="ma-4" indeterminate></v-progress-circular>
+                <v-progress-circular :size="64" :width="6" class="ma-6" indeterminate></v-progress-circular>
             </div>
-            <p v-if=jobID class="text-md-center">JobID: {{ jobID }}</p>
+            <!-- <p v-if=jobID class="text-md-center">JobID: {{ jobID }}</p> -->
         </template>
         <template v-slot:actions>
           <v-btn

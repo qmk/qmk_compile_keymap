@@ -1,5 +1,5 @@
 <template>
-  <v-container class="pa-4" fluid style="height:60em">
+  <v-container class="pa-4" fluid style="height:85vh">
     <div>
       <!-- Editor actions -->
       <v-btn class="mb-4" append-icon="fa-solid fa-indent" @click="formatCode">Format</v-btn>

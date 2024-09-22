@@ -14,6 +14,12 @@
                 </template>
                 <MiscConfig/>
             </v-list-group>
+            <v-list-group value="Debounce">
+                <template v-slot:activator="{ props }">
+                    <v-list-item v-bind="props" title="Debounce"/>
+                </template>
+                <Debounce/>
+            </v-list-group>
             <v-list-group value="Build">
                 <template v-slot:activator="{ props }">
                     <v-list-item v-bind="props" title="Build"/>
@@ -27,5 +33,5 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-const open = ref(['Features', 'Config']);
+const open = ref(['Features']);
 </script>
