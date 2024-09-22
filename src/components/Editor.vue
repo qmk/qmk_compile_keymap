@@ -2,7 +2,15 @@
   <v-container class="pa-4" fluid style="height:85vh">
     <!-- Editor actions -->
     <div class="d-flex">
-      <v-btn class="mb-4 mr-4" variant="tonal" append-icon="fa-solid fa-file-import" @click="importKeymap">Import</v-btn>
+      <v-btn-group class="mb-4 mr-4" variant="tonal" density="compact" divided>
+        <v-btn @click="importKeymap">
+          <v-icon>fa-solid fa-upload</v-icon>
+        </v-btn>
+        <v-btn readonly>keymap.json</v-btn>
+        <v-btn @click="exportKeymap">
+          <v-icon>fa-solid fa-download</v-icon>
+        </v-btn>
+      </v-btn-group>
       <v-spacer/>
       <v-btn class="mb-4 mr-4" variant="tonal" append-icon="fa-solid fa-indent" @click="formatCode">Format</v-btn>
     </div>
@@ -26,6 +34,7 @@ import { ref, shallowRef, computed } from "vue";
 import { useTheme } from "vuetify";
 import { useTimeoutFn } from "@vueuse/core";
 import { useKeymapState } from "@/composables/useKeymapState";
+import { saveAs } from 'file-saver';
 
 const theme = useTheme();
 const { keymap } = useKeymapState();
@@ -98,5 +107,14 @@ const importKeymap = () => {
   };
   i.click();
 };
+
+const exportKeymap = () => {
+  const km_str = JSON.stringify(keymap.value, null, 4);
+  console.log(km_str)
+  var blob = new Blob([km_str], {type: "text/plain;charset=utf-8"});
+
+  saveAs(blob, 'keymap.json');
+};
+
 </script>
 

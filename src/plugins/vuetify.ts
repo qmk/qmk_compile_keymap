@@ -13,7 +13,9 @@ export default createVuetify({
   },
   defaults: {
     VMain: {
-      VSwitch: { color: 'primary', density: 'compact', class: 'pl-4' }
+      VSwitch: { color: 'primary', density: 'compact', class: 'pl-4' },
+      VSelect: { density: 'compact' },
+      VSlider: { density: 'compact' }
     }
   },
   theme: {

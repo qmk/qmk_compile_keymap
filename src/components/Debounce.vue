@@ -1,5 +1,5 @@
 <template>
-  <v-slider :max="50" :min="0" :step="1" label="Value" v-model="value" hide-details>
+  <v-slider :max="50" :min="0" :step="1" class="pb-2" label="Value" v-model="value" hide-details>
     <template v-slot:append>
       <v-text-field
         v-model="value"

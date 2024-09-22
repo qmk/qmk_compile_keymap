@@ -1,5 +1,5 @@
 <template>
-    <v-btn block color="primary" append-icon="fa-solid fa-play" @click="dialog = true">Compile</v-btn>
+    <v-btn block color="primary" class="mt-2 mb-4" append-icon="fa-solid fa-play" @click="dialog = true">Compile</v-btn>
     <v-dialog
       v-model="dialog"
       width="auto"
