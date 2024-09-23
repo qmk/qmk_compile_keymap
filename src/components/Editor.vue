@@ -89,6 +89,7 @@ const importKeymap = () => {
   // TODO: find npm FileReader.readAsText lib like file-saver
   const i = document.createElement("input");
   i.type = "file";
+  i.accept = ".json";
   // eslint-disable-next-line func-names
   i.onchange = function (event: Event) {
     const files = (event.target as HTMLInputElement).files;
