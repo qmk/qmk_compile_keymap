@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar :elevation="2">
-      <template v-slot:prepend>
+      <template #prepend>
         <v-fab-transition>
           <v-img src="@/assets/logo.svg" height="32px" width="48px" />
         </v-fab-transition>
@@ -9,10 +9,10 @@
 
       <v-app-bar-title>QMK Keymap Compiler</v-app-bar-title>
 
-      <template v-slot:append>
+      <template #append>
         <v-switch class="d-none d-sm-flex" inset true-icon="fa-regular fa-moon" false-icon="fa-regular fa-sun"
           true-value="dark" false-value="light" v-model="mode" />
-          <v-divider class="mx-2 my-4 d-none d-md-flex" vertical />
+        <v-divider class="mx-2 my-4 d-none d-md-flex" vertical />
         <v-btn class="d-none d-md-flex" size="small" href="https://discord.gg/qmk" icon="fa-brands fa-discord" />
         <v-btn class="d-none d-md-flex" size="small" href="https://github.com/zvecr/qmk_compile_keymap" icon="fa-brands fa-github" />
       </template>

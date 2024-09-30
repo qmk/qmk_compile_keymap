@@ -4,44 +4,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
 import { useKeymapState } from '@/composables/useKeymapState'
+import { dottyComputed } from '@/dottyComputed';
 
 const { keymap } = useKeymapState()
 
-const usbdetect = computed({
-  get() {
-    return keymap.value.config?.split?.usb_detect?.enabled ?? false;
-  },
-  set(val) {
-    if (val) {
-        keymap.value.config = keymap.value.config || {}
-        keymap.value.config.split = keymap.value.config.split || {}
-        keymap.value.config.split.usb_detect = keymap.value.config.split.usb_detect || {}
-        keymap.value.config.split.usb_detect.enabled = true;
-    } else {
-        // TODO: delete actual value and clean up empty parents
-        delete keymap.value?.config?.split?.usb_detect
-    }
-  }
-})
-
-const watchdog = computed({
-  get() {
-    return keymap.value.config?.split?.transport?.watchdog ?? false;
-  },
-  set(val) {
-    if (val) {
-        keymap.value.config = keymap.value.config || {}
-        keymap.value.config.split = keymap.value.config.split || {}
-        keymap.value.config.split.transport = keymap.value.config.split.transport || {}
-        keymap.value.config.split.transport.watchdog = true;
-    } else {
-        // TODO: delete actual value and clean up empty parents
-        delete keymap.value?.config?.split?.transport
-    }
-  }
-})
-
+const usbdetect = dottyComputed(keymap, 'config.split.usb_detect.enabled');
+const watchdog = dottyComputed(keymap, 'config.split.transport.watchdog');
 </script>
 

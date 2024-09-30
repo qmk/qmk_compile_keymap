@@ -1,31 +1,27 @@
 <template>
-    <v-btn block color="primary" class="mt-2 mb-4" append-icon="fa-solid fa-play" @click="dialog = true">Compile</v-btn>
-    <v-dialog
-      v-model="dialog"
-      width="auto"
-      persistent
-      @afterEnter="submitJob"
+  <v-btn block color="primary" class="mt-2 mb-4" append-icon="fa-solid fa-play" @click="dialog = true">Compile</v-btn>
+  <v-dialog
+    v-model="dialog"
+    width="auto"
+    persistent
+    @after-enter="submitJob"
+  >
+    <v-card
+      max-width="400"
+      title="Compiling..."
     >
-      <v-card
-        max-width="400"
-        title="Compiling..."
-      >
-        <template v-slot:text>
-            <p class="text-md-center">Your firmware will be automatically downloaded after the compilation is complete.</p>
-            <div class="d-flex justify-center">
-                <v-progress-circular :size="64" :width="6" class="ma-6" indeterminate></v-progress-circular>
-            </div>
-            <!-- <p v-if=jobID class="text-md-center">JobID: {{ jobID }}</p> -->
-        </template>
-        <template v-slot:actions>
-          <v-btn
-            class="ms-auto"
-            text="Abort"
-            @click="abort"
-          ></v-btn>
-        </template>
-      </v-card>
-    </v-dialog>
+      <template #text>
+        <p class="text-md-center">Your firmware will be automatically downloaded after the compilation is complete.</p>
+        <div class="d-flex justify-center">
+          <v-progress-circular :size="64" :width="6" class="ma-6" indeterminate/>
+        </div>
+        <!-- <p v-if=jobID class="text-md-center">JobID: {{ jobID }}</p> -->
+      </template>
+      <template #actions>
+        <v-btn class="ms-auto" text="Abort" @click="abort"/>
+      </template>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script lang="ts" setup>

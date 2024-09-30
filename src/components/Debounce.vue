@@ -1,6 +1,6 @@
 <template>
   <v-slider :max="50" :min="0" :step="1" class="pb-2" label="Value" v-model="value" hide-details>
-    <template v-slot:append>
+    <template #append>
       <v-text-field
         v-model="value"
         density="compact"
@@ -8,19 +8,19 @@
         type="number"
         hide-details
         single-line
-      ></v-text-field>
+      />
     </template>
   </v-slider>
-  <v-select clearable label="Algorithms" :items="debounce_type" v-model="type"/>
+  <v-select clearable label="Algorithms" :items="DEBOUNCE_TYPES" v-model="type"/>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
 import { useKeymapState } from '@/composables/useKeymapState'
+import { dottyComputed } from '@/dottyComputed';
 
 const { keymap } = useKeymapState()
 
-const debounce_type = [
+const DEBOUNCE_TYPES = [
   "asym_eager_defer_pk",
   "sym_defer_g",
   "sym_defer_pk",
@@ -29,35 +29,7 @@ const debounce_type = [
   "sym_eager_pr",
 ];
 
-const value = computed({
-  get() {
-    return keymap.value.config?.debounce ?? 5;
-  },
-  set(val) {
-    val = +val;
-    if (val !== 5) {
-        keymap.value.config = keymap.value.config || {}
-        keymap.value.config.debounce = val;
-    } else {
-        delete keymap.value.config?.debounce;
-    }
-  }
-})
-
-const type = computed({
-    get() {
-      return keymap.value.config?.build?.debounce_type ?? null;
-    },
-    set(val) {
-      if (val) {
-        keymap.value.config = keymap.value.config || {}
-        keymap.value.config.build = keymap.value.config.build || {}
-        keymap.value.config.build.debounce_type = val;
-      } else {
-        // TODO: delete actual value and clean up empty parents
-        delete keymap.value?.config?.build?.debounce_type;
-      }
-    }
-  })
+const value = dottyComputed(keymap, 'config.debounce', 5);
+const type = dottyComputed(keymap, 'config.build.debounce_type', null);
 
 </script>
