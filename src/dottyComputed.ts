@@ -17,7 +17,11 @@ export const dottyComputed = (ref: Ref, path: string, def: any = false) => {
       }
     },
     set(val) {
-      if (val) {
+      if (typeof def === "number") {
+        val = +val;
+      }
+
+      if (val && val !== def) {
         let cur = ref.value;
         for (const part of parts) {
           cur[part] = cur[part] || {};
