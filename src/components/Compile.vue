@@ -28,7 +28,7 @@
 import { ref } from 'vue'
 import { useFetch, useIntervalFn } from '@vueuse/core'
 import { useKeymapState } from '@/composables/useKeymapState'
-// import { saveAs } from 'file-saver';
+import { saveAs } from 'file-saver';
 
 const { keymap } = useKeymapState()
 
@@ -41,9 +41,7 @@ const { pause, resume } = useIntervalFn(async () => {
     if(data.value.status === 'finished') {
         abort();
 
-        // TODO: betterer firmware download
-        // saveAs(`https://api.qmk.fm/v1/compile/${jobID.value}/download`, data.value.result.firmware_filename);
-        window.open(`https://api.qmk.fm/v1/compile/${jobID.value}/download`, '_blank')
+        saveAs(`https://api.qmk.fm/v1/compile/${jobID.value}/download`, data.value.result.firmware_filename);
     }
 }, 2500, {immediate: false})
 
