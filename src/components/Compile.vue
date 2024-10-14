@@ -6,7 +6,7 @@
     persistent
     @after-enter="submitJob"
   >
-    <v-card
+  <v-card
       max-width="400"
       title="Compiling..."
     >
@@ -15,41 +15,50 @@
         <div class="d-flex justify-center">
           <v-progress-circular :size="64" :width="6" class="ma-6" indeterminate/>
         </div>
-        <!-- <p v-if=jobID class="text-md-center">JobID: {{ jobID }}</p> -->
       </template>
+
       <template #actions>
         <v-btn class="ms-auto" text="Abort" @click="abort"/>
+        <a class="d-none" ref="download" :download="firmwareName" :href="firmwareURL"/>
       </template>
     </v-card>
   </v-dialog>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, computed, useTemplateRef } from 'vue'
 import { useFetch, useIntervalFn } from '@vueuse/core'
 import { useKeymapState } from '@/composables/useKeymapState'
-import { saveAs } from 'file-saver';
 
-const { keymap } = useKeymapState()
+const { keymap } = useKeymapState();
 
 const dialog = ref(false);
-const jobID = ref('')
+const downloadBtn = useTemplateRef('download');
+
+const jobID = ref('');
+const firmwareName = ref('');
+
+const firmwareURL = computed(() => {
+    return `https://api.qmk.fm/v1/compile/${jobID.value}/download`;
+})
 
 const { pause, resume } = useIntervalFn(async () => {
-    const { data } = await useFetch(`https://api.qmk.fm/v1/compile/${jobID.value}`).get().json()
+    const { data } = await useFetch(`https://api.qmk.fm/v1/compile/${jobID.value}`).get().json();
 
     if(data.value.status === 'finished') {
-        abort();
+      firmwareName.value = data.value.result.firmware_filename;
 
-        saveAs(`https://api.qmk.fm/v1/compile/${jobID.value}/download`, data.value.result.firmware_filename);
+      setTimeout(() => {
+        download();
+      });
     }
 }, 2500, {immediate: false})
 
 const submitJob = async () => {
-    const { data } = await useFetch('https://api.qmk.fm/v1/compile').post(keymap.value).json()
+    const { data } = await useFetch('https://api.qmk.fm/v1/compile').post(keymap.value).json();
 
     if (!data.value.enqueued) {
-        console.log("error?")
+        console.log("error?");
         return;
     }
 
@@ -60,6 +69,12 @@ const submitJob = async () => {
 const abort = () => {
     pause();
     dialog.value = false;
+}
+
+const download = () => {
+    abort();
+
+    downloadBtn.value?.click();
 }
 
 </script>
