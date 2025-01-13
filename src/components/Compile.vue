@@ -45,12 +45,16 @@ const firmwareURL = computed(() => {
 const { pause, resume } = useIntervalFn(async () => {
     const { data } = await useFetch(`https://api.qmk.fm/v1/compile/${jobID.value}`).get().json();
 
-    if(data.value.status === 'finished') {
+    if(data.value.status === 'finished' && !data.value.is_failed) {
       firmwareName.value = data.value.result.firmware_filename;
 
       setTimeout(() => {
         download();
       });
+    } else if(data.value.status === 'finished' && data.value.is_failed) {
+      console.log(data.value.result.output);
+
+      abort();
     }
 }, 2500, {immediate: false})
 
