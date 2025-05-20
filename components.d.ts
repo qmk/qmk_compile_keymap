@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    Actions: typeof import('./src/components/Actions.vue')['default']
     Build: typeof import('./src/components/Build.vue')['default']
     Compile: typeof import('./src/components/Compile.vue')['default']
     Debounce: typeof import('./src/components/Debounce.vue')['default']

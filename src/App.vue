@@ -14,12 +14,15 @@
           true-value="dark" false-value="light" v-model="mode" />
         <v-divider class="mx-2 my-4 d-none d-md-flex" vertical />
         <v-btn class="d-none d-md-flex" size="small" href="https://discord.gg/qmk" icon="fa-brands fa-discord" />
-        <v-btn class="d-none d-md-flex" size="small" href="https://github.com/zvecr/qmk_compile_keymap" icon="fa-brands fa-github" />
+        <v-btn class="d-none d-md-flex" size="small" href="https://github.com/qmk/qmk_compile_keymap" icon="fa-brands fa-github" />
       </template>
     </v-app-bar>
 
     <v-main>
       <SideBar/>
+      <suspense>
+        <Actions/>
+      </suspense>
       <Editor/>
     </v-main>
 

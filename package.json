@@ -10,7 +10,7 @@
     "lint": "eslint . --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@guolao/vue-monaco-editor": "^1.5.4",
+    "@guolao/vue-monaco-editor": "^1.5.5",
     "@mdi/font": "7.4.47",
     "@vueuse/core": "^11.1.0",
     "file-saver": "^2.0.5",

@@ -12,7 +12,7 @@ registerPlugins(app)
 app.use(VueMonacoEditorPlugin, {
   paths: {
     // You can change the CDN config to load other versions
-    vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.43.0/min/vs'
+    vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/min/vs'
   },
 })
 

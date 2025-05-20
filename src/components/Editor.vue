@@ -1,40 +1,27 @@
 <template>
-  <v-container class="pa-4" fluid style="height:85vh">
-    <!-- Editor actions -->
-    <div class="d-flex">
-      <v-btn-group class="mb-4 mr-4" variant="tonal" density="compact" divided>
-        <v-btn @click="importKeymap">
-          <v-icon>fa-solid fa-upload</v-icon>
-        </v-btn>
-        <v-btn readonly>keymap.json</v-btn>
-        <v-btn @click="exportKeymap">
-          <v-icon>fa-solid fa-download</v-icon>
-        </v-btn>
-      </v-btn-group>
-      <v-spacer/>
-      <v-btn class="mb-4 mr-4" variant="tonal" append-icon="fa-solid fa-indent" @click="formatCode">Format</v-btn>
+  <v-container class="pt-0" fluid style="height:84vh">
+          <!-- Editor actions -->
+    <div class="text-red pa-4" v-if="errors.length">
+      <p>Errors detected...</p>
+      <li v-for="error in errors">{{ error }}</li>
     </div>
 
-    <p class="text-red pa-4" v-if="error">{{ error }}</p>
-
     <vue-monaco-editor
-    v-model:value="code"
-    :theme="theme.global.name.value === 'dark' ? 'vs-dark' : 'vs'"
-    language="json"
-    :options="MONACO_EDITOR_OPTIONS"
-    @mount="handleMount"
-    @change="handleChange"
-    @validate="handleError"
-  />
-</v-container>
+      v-model:value="code"
+      :theme="theme.global.name.value === 'dark' ? 'vs-dark' : 'vs'"
+      language="json"
+      :options="MONACO_EDITOR_OPTIONS"
+      @mount="handleMount"
+      @change="handleChange"
+      @validate="handleError"
+    />
+  </v-container>
 </template>
 
 <script lang="ts" setup>
-import { ref, shallowRef, computed } from "vue";
+import { ref, computed } from "vue";
 import { useTheme } from "vuetify";
-import { useTimeoutFn } from "@vueuse/core";
 import { useKeymapState } from "@/composables/useKeymapState";
-import { saveAs } from 'file-saver';
 
 const theme = useTheme();
 const { keymap } = useKeymapState();
@@ -60,62 +47,28 @@ const code = computed({
   },
 });
 
-const editor = shallowRef();
-const handleMount = (editorInstance: any) => {
-  editor.value = editorInstance;
-
-  useTimeoutFn(() => {
-    formatCode();
-  }, 200);
+const handleMount = (editorInstance: any, monacoInstance: any) => {
+  monacoInstance.languages.json.jsonDefaults.setDiagnosticsOptions({
+    validate: true,
+    enableSchemaRequest: true,
+    schemaRequest: 'ignore',
+    schemas: [
+      {
+        uri: 'http://keyboards.develop.qmk.fm/v1/schemas/keymap.jsonschema',
+        fileMatch: [editorInstance.getModel()?.uri.toString()]
+      }
+    ],
+  });
 };
 
-const error = ref("");
-
-// your action
-const formatCode = () => {
-  editor.value?.getAction("editor.action.formatDocument").run();
-};
+const errors = ref<string[]>([]);
 
 const handleChange = () => {
   // ??
 };
 
 const handleError = (markers: any[]) => {
-  console.log(markers);
-  error.value = markers.length ? "Errors detected..." : "";
+  // console.log(markers);
+  errors.value = markers.map((i) => `Line[${i.startLineNumber}] ${i.message}`);
 };
-
-const importKeymap = () => {
-  // TODO: find npm FileReader.readAsText lib like file-saver
-  const i = document.createElement("input");
-  i.type = "file";
-  i.accept = ".json";
-  // eslint-disable-next-line func-names
-  i.onchange = function (event: Event) {
-    const files = (event.target as HTMLInputElement).files;
-    if (!files || !files.length){
-      return;
-    }
-
-    const file = files[0];
-    const fr = new FileReader();
-    fr.onload = () => {
-      const km = JSON.parse(fr.result as string);
-      keymap.value = km;
-    };
-
-    fr.readAsText(file);
-  };
-  i.click();
-};
-
-const exportKeymap = () => {
-  const km_str = JSON.stringify(keymap.value, null, 4);
-  console.log(km_str)
-  var blob = new Blob([km_str], {type: "text/plain;charset=utf-8"});
-
-  saveAs(blob, 'keymap.json');
-};
-
 </script>
-
