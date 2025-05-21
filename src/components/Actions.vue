@@ -34,7 +34,7 @@ const keyboard = ref();
 
 const loadDefaultKeymap = async () => {
   if (!keyboard.value) {
-    keymap.value = defaultKeymap;
+    keymap.value = JSON.parse(JSON.stringify(defaultKeymap));
     return;
   }
 

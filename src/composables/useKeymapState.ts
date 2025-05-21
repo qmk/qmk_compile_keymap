@@ -25,7 +25,7 @@ export type Keymap = {
 
 export const useKeymapState = createGlobalState(
   () => {
-    const keymap = ref<Keymap>(defaultKeymap)
+    const keymap = ref<Keymap>(JSON.parse(JSON.stringify(defaultKeymap)))
     return { keymap }
   }
 )
