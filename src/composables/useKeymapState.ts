@@ -1,8 +1,6 @@
 import { ref } from 'vue'
 import { createGlobalState } from '@vueuse/core'
 
-import type {KeyboardInformation} from 'keyboard.d.ts'
-
 import defaultKeymap from '@/assets/keymap.json'
 
 export type Keymap = {
@@ -14,7 +12,7 @@ export type Keymap = {
 
     layers:string[][],
 
-    config?: KeyboardInformation,
+    config?: any,
 
     converter?: string,
 

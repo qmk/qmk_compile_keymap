@@ -21,14 +21,3 @@ yarn dev
 ```
 yarn build && npx serve dist
 ```
-
-### Generate keyboard.d.ts
-
-```
-# convert from hjson -> json
-pipx run hjson -j ~/qmk_firmware/data/schemas/keyboard.jsonschema > src/assets/schemas/keyboard.jsonschema
-pipx run hjson -j ~/qmk_firmware/data/schemas/definitions.jsonschema > src/assets/schemas/qmk.definitions.v1
-
-# generate ts types from jsonschema
-npx --package=json-schema-to-typescript json2ts  -i src/assets/schemas/keyboard.jsonschema  --cwd=src/assets/schemas/ -o keyboard.d.ts
-```
