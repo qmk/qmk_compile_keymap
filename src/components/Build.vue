@@ -1,6 +1,8 @@
 <template>
   <v-switch hide-details label="LTO" v-model="lto"/>
-  <v-select clearable label="Converter" :items="CONVERTERS" v-model="converter"/>
+
+  <v-label>Converter</v-label>
+  <v-select clearable :items="CONVERTERS" v-model="converter" density="compact"/>
 </template>
   
 <script lang="ts" setup>

@@ -1,17 +1,9 @@
 <template>
-  <v-slider :max="50" :min="0" :step="1" class="pb-2" label="Value" v-model="value" hide-details>
-    <template #append>
-      <v-text-field
-        v-model="value"
-        density="compact"
-        style="width: 5em"
-        type="number"
-        hide-details
-        single-line
-      />
-    </template>
-  </v-slider>
-  <v-select clearable label="Algorithms" :items="DEBOUNCE_TYPES" v-model="type"/>
+  <v-label>Value</v-label>
+  <v-number-input :max="50" :min="0" density="compact" v-model="value"/>
+
+  <v-label>Algorithm</v-label>
+  <v-select clearable :items="DEBOUNCE_TYPES" v-model="type"/>
 </template>
 
 <script lang="ts" setup>

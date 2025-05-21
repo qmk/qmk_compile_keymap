@@ -15,5 +15,6 @@ declare module 'vue' {
     Features: typeof import('./src/components/Features.vue')['default']
     MiscConfig: typeof import('./src/components/MiscConfig.vue')['default']
     SideBar: typeof import('./src/components/SideBar.vue')['default']
+    Tapping: typeof import('./src/components/Tapping.vue')['default']
   }
 }

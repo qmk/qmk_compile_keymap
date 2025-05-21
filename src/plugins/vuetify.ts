@@ -15,7 +15,7 @@ export default createVuetify({
     VMain: {
       VSwitch: { color: 'primary', density: 'compact', class: 'pl-4' },
       VSelect: { density: 'compact' },
-      VSlider: { density: 'compact' }
+      VNumberInput: { density: 'compact' }
     }
   },
   theme: {

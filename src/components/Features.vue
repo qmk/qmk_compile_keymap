@@ -2,6 +2,7 @@
   <v-switch hide-details label="Bootmagic" v-model="bootmagic"/>
   <v-switch hide-details label="Extra Keys" v-model="extrakey"/>
   <v-switch hide-details label="Mouse Keys" v-model="mousekey"/>
+  <v-switch hide-details label="NKRO" v-model="nkro"/>
   <v-switch hide-details label="VIA" v-model="via"/>
 </template>
 
@@ -14,6 +15,7 @@ const { keymap } = useKeymapState()
 const bootmagic = dottyComputed(keymap, 'config.features.bootmagic');
 const extrakey = dottyComputed(keymap, 'config.features.extrakey');
 const mousekey = dottyComputed(keymap, 'config.features.mousekey');
+const nkro = dottyComputed(keymap, 'config.features.nkro');
 const via = dottyComputed(keymap, 'config.features.via');
 
 </script>
