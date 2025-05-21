@@ -21,7 +21,7 @@ export const dottyComputed = (ref: Ref, path: string, def: any = false) => {
         val = +val;
       }
 
-      if (val && val !== def) {
+      if ((val || (val === 0)) && val !== def) {
         let cur = ref.value;
         for (const part of parts) {
           cur[part] = cur[part] || {};
@@ -30,12 +30,19 @@ export const dottyComputed = (ref: Ref, path: string, def: any = false) => {
         cur[key] = val;
       } else {
         try {
-          let cur = ref.value;
+          let parents = [ref.value];
           for (const part of parts) {
-            cur = cur[part];
+            parents.push(parents[parents.length - 1][part]);
           }
-          // TODO: clean up empty parents
-          delete cur[key];
+
+          delete parents[parents.length - 1][key];
+
+          // clean up empty parents
+          for (let i = parts.length -1; i >= 0; i--) {
+            if(Object.keys(parents[i][parts[i]]).length === 0) {
+              delete parents[i][parts[i]];
+            }
+          }
         } catch {
           // log?
         }
