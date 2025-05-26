@@ -54,7 +54,7 @@ const handleMount = (editorInstance: any, monacoInstance: any) => {
     schemaRequest: 'ignore',
     schemas: [
       {
-        uri: 'https://keyboards.develop.qmk.fm/v1/schemas/keymap.jsonschema',
+        uri: 'https://keyboards.qmk.fm/v1/schemas/keymap.jsonschema',
         fileMatch: [editorInstance.getModel()?.uri.toString()]
       }
     ],
