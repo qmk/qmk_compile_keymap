@@ -3,7 +3,7 @@
     <v-app-bar :elevation="2">
       <template #prepend>
         <v-fab-transition>
-          <v-img src="@/assets/logo.svg" height="32px" width="48px" />
+          <v-img :src="`qmk-logo-${mode}.svg`" height="32px" width="48px" position="right"/>
         </v-fab-transition>
       </template>
 
@@ -39,9 +39,9 @@ import { useTheme } from "vuetify";
 const theme = useTheme();
 const mode = useColorMode({
   onChanged: (mode) => {
-    theme.global.name.value = mode;
+    theme.change(mode);
   },
 });
 
-theme.global.name.value = mode.value;
+theme.change(mode.value);
 </script>
