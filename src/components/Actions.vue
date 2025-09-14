@@ -1,6 +1,6 @@
 <template>
-  <v-container class="pb-0">
-    <div class="d-flex">
+  <v-container fluid>
+    <v-row class="px-4 pt-3">
         
       <v-autocomplete v-model="keyboard" @update:modelValue="loadDefaultKeymap" clearable density="compact" label="Default Keymap..." :items="keyboard_list"/>
   
@@ -15,7 +15,7 @@
           <v-icon>fa-solid fa-download</v-icon>
         </v-btn>
       </v-btn-group>
-    </div>
+    </v-row>
   </v-container>
 </template>
 

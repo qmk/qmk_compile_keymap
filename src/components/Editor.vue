@@ -1,5 +1,5 @@
 <template>
-  <v-container class="pt-0" fluid style="height:84vh">
+  <v-container class="pt-0" fluid height="calc(100vh - 12em)">
           <!-- Editor actions -->
     <div class="text-red pa-4" v-if="errors.length">
       <p>Errors detected...</p>
