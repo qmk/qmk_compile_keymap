@@ -1,7 +1,8 @@
-import { useFetch, createGlobalState } from '@vueuse/core';
+import { useFetch, UseFetchReturn, createGlobalState } from '@vueuse/core';
+import { API_BASE_URL } from '@/constants'
 
-export const useKeyboardList = createGlobalState(async () => {
-  return await useFetch('https://keyboards.qmk.fm/v1/keyboard_list.json', {
+export const useKeyboardList = createGlobalState((): UseFetchReturn<string[]> & PromiseLike<UseFetchReturn<string[]>> => {
+  return useFetch(`${API_BASE_URL}/keyboard_list.json`, {
     afterFetch(ctx) {
       ctx.data = ctx.data.keyboards;
       return ctx;

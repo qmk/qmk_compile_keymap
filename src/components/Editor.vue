@@ -22,6 +22,7 @@
 import { ref, computed } from "vue";
 import { useTheme } from "vuetify";
 import { useKeymapState } from "@/composables/useKeymapState";
+import { API_BASE_URL } from '@/constants'
 
 const theme = useTheme();
 const { keymap } = useKeymapState();
@@ -54,7 +55,7 @@ const handleMount = (editorInstance: any, monacoInstance: any) => {
     schemaRequest: 'ignore',
     schemas: [
       {
-        uri: 'https://keyboards.qmk.fm/v1/schemas/keymap.jsonschema',
+        uri: `${API_BASE_URL}/schemas/keymap.jsonschema`,
         fileMatch: [editorInstance.getModel()?.uri.toString()]
       }
     ],

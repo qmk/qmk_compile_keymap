@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row class="px-4 pt-3">
         
-      <v-autocomplete v-model="keyboard" @update:modelValue="loadDefaultKeymap" clearable density="compact" label="Default Keymap..." :items="keyboard_list"/>
+      <v-autocomplete v-model="keyboard" @update:modelValue="loadDefaultKeymap" clearable density="compact" label="Default Keymap..." :items="keyboard_list ?? []"/>
   
       <v-spacer/>
       

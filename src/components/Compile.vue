@@ -19,27 +19,28 @@
 
       <template #actions>
         <v-btn class="ms-auto" text="Abort" @click="abort"/>
-        <a class="d-none" ref="download" :download="firmwareName" :href="firmwareURL"/>
+        <a class="d-none" ref="downloadBtn" :download="firmwareName" :href="firmwareURL"/>
       </template>
     </v-card>
   </v-dialog>
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, useTemplateRef } from 'vue'
+import { ref, computed } from 'vue'
 import { useFetch, useIntervalFn } from '@vueuse/core'
 import { useKeymapState } from '@/composables/useKeymapState'
+import { COMPILE_BASE_URL } from '@/constants'
 
 const { keymap } = useKeymapState();
 
 const dialog = ref(false);
-const downloadBtn = useTemplateRef('download');
+const downloadBtn = ref();
 
 const jobID = ref('');
 const firmwareName = ref('');
 
 const firmwareURL = computed(() => {
-    return `https://api.qmk.fm/v1/compile/${jobID.value}/download`;
+    return `${COMPILE_BASE_URL}/${jobID.value}/download`;
 })
 
 const { pause, resume } = useIntervalFn(async () => {
