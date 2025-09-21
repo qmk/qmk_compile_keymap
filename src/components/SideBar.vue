@@ -1,60 +1,65 @@
 <template>
   <v-navigation-drawer permanent>
-    <v-list nav v-model:opened="open">
-      <Compile/>
+    <v-list v-model:opened="open" nav>
+      <Compile />
 
-      <v-divider/>
+      <v-divider />
 
       <v-list-group value="Features">
         <template #activator="{ props }">
-          <v-list-item v-bind="props" title="Features"/>
+          <v-list-item v-bind="props" title="Features" />
         </template>
-        <Features/>
+
+        <Features />
       </v-list-group>
 
-      <v-divider/>
+      <v-divider />
 
       <v-list-group value="Config">
         <template #activator="{ props }">
-          <v-list-item v-bind="props" title="Config"/>
+          <v-list-item v-bind="props" title="Config" />
         </template>
-        <MiscConfig/>
+
+        <MiscConfig />
       </v-list-group>
 
-      <v-divider/>
+      <v-divider />
 
       <v-list-group value="Tapping">
         <template #activator="{ props }">
-          <v-list-item v-bind="props" title="Tapping"/>
+          <v-list-item v-bind="props" title="Tapping" />
         </template>
-        <Tapping/>
+
+        <Tapping />
       </v-list-group>
 
       <v-divider/>
 
       <v-list-group value="Debounce">
         <template #activator="{ props }">
-          <v-list-item v-bind="props" title="Debounce"/>
+          <v-list-item v-bind="props" title="Debounce" />
         </template>
-        <Debounce/>
+
+        <Debounce />
       </v-list-group>
 
       <v-divider/>
 
       <v-list-group value="Build">
         <template #activator="{ props }">
-          <v-list-item v-bind="props" title="Build"/>
+          <v-list-item v-bind="props" title="Build" />
         </template>
-        <Build/>
+
+        <Build />
       </v-list-group>
 
-      <v-divider/>
+      <v-divider />
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 const open = ref(['Features']);
 </script>

@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row class="px-4 pt-3">
         
-      <v-autocomplete v-model="keyboard" @update:modelValue="loadDefaultKeymap" clearable density="compact" label="Default Keymap..." :items="keyboard_list ?? []"/>
+      <v-autocomplete v-model="keyboard" @update:modelValue="loadDefaultKeymap" clearable density="compact" label="Default Keymap..." :items="keyboard_list ?? []" />
   
       <v-spacer/>
       
@@ -22,10 +22,10 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { useFetch } from "@vueuse/core";
-import { useKeyboardList } from '@/composables/useKeyboardList'
+import { useKeyboardList } from '@/composables/useKeyboardList';
 import { useKeymapState } from "@/composables/useKeymapState";
 import { saveAs } from "file-saver";
-import defaultKeymap from '@/assets/keymap.json'
+import defaultKeymap from '@/assets/keymap.json';
 
 const { keymap } = useKeymapState();
 const { data: keyboard_list } = await useKeyboardList();

@@ -1,19 +1,19 @@
 <template>
   <v-label>Keycode Delay</v-label>
-  <v-number-input :min="0" density="compact" v-model="tap_keycode_delay"/>
+  <v-number-input v-model="tap_keycode_delay" :min="0" density="compact" />
 
   <v-label>Caps Lock Delay</v-label>
-  <v-number-input :min="0" density="compact" v-model="tap_capslock_delay"/>
+  <v-number-input v-model="tap_capslock_delay" :min="0" density="compact" />
 
   <v-label>Term</v-label>
-  <v-number-input :min="0" density="compact" v-model="term"/>
+  <v-number-input v-model="term" :min="0" density="compact" />
 
   <v-label>Toggle</v-label>
-  <v-number-input :min="0" density="compact" v-model="toggle"/>
+  <v-number-input v-model="toggle" :min="0" density="compact" />
 </template>
 
 <script lang="ts" setup>
-import { useKeymapState } from '@/composables/useKeymapState'
+import { useKeymapState } from '@/composables/useKeymapState';
 import { dottyComputed } from '@/dottyComputed';
 
 const { keymap } = useKeymapState();

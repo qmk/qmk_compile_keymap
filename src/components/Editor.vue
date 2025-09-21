@@ -1,7 +1,6 @@
 <template>
   <v-container class="pt-0" fluid height="calc(100vh - 12em)">
-          <!-- Editor actions -->
-    <div class="text-red pa-4" v-if="errors.length">
+    <div v-if="errors.length" class="text-red pa-4">
       <p>Errors detected...</p>
       <li v-for="error in errors">{{ error }}</li>
     </div>
@@ -22,7 +21,7 @@
 import { ref, computed } from "vue";
 import { useTheme } from "vuetify";
 import { useKeymapState } from "@/composables/useKeymapState";
-import { API_BASE_URL } from '@/constants'
+import { API_BASE_URL } from '@/constants';
 
 const theme = useTheme();
 const { keymap } = useKeymapState();

@@ -1,29 +1,28 @@
-import { ref } from 'vue'
-import { createGlobalState } from '@vueuse/core'
+import { ref } from 'vue';
+import { createGlobalState } from '@vueuse/core';
 
-import defaultKeymap from '@/assets/keymap.json'
+import defaultKeymap from '@/assets/keymap.json';
 
 export type Keymap = {
-    version: number,
+    version: number;
 
-    keyboard: string, 
-    keymap: string, 
-    layout: string,
+    keyboard: string;
+    keymap: string;
+    layout: string;
 
-    layers:string[][],
+    layers:string[][];
 
-    config?: any,
+    config?: any;
 
-    converter?: string,
+    converter?: string;
 
-    author?: string,
-    notes?: string,
-    documentation?: string,
-}
+    author?: string;
+    notes?: string;
+    documentation?: string;
+};
 
-export const useKeymapState = createGlobalState(
-  () => {
-    const keymap = ref<Keymap>(JSON.parse(JSON.stringify(defaultKeymap)))
-    return { keymap }
+export const useKeymapState = createGlobalState(() => {
+    const keymap = ref<Keymap>(JSON.parse(JSON.stringify(defaultKeymap)));
+    return { keymap };
   }
-)
+);
