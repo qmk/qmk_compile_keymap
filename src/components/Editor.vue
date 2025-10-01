@@ -7,10 +7,11 @@
 
     <vue-monaco-editor
       v-model:value="code"
-      :theme="theme.global.name.value === 'dark' ? 'vs-dark' : 'vs'"
+      :theme="`qmk-${theme.global.name.value}`"
       language="json"
       :options="MONACO_EDITOR_OPTIONS"
       @mount="handleMount"
+      @beforeMount="handleBeforeMount"
       @change="handleChange"
       @validate="handleError"
     />
@@ -46,6 +47,28 @@ const code = computed({
     }
   },
 });
+
+const handleBeforeMount = (monacoInstance: any) => {
+  const dark = {
+    base: 'vs-dark',
+    inherit: true,
+    rules: [],
+    colors: {
+        'editor.background': '#1B1B1F',
+    },
+  };
+  monacoInstance.editor.defineTheme('qmk-dark', dark);
+
+  const light = {
+    base: 'vs',
+    inherit: true,
+    rules: [],
+    colors: {
+      // nothing?
+    },
+  };
+  monacoInstance.editor.defineTheme('qmk-light', light);
+};
 
 const handleMount = (editorInstance: any, monacoInstance: any) => {
   monacoInstance.languages.json.jsonDefaults.setDiagnosticsOptions({

@@ -1,12 +1,12 @@
 <template>
   <v-container fluid>
-    <v-row class="px-4 pt-3">
+    <v-row class="pa-4">
         
-      <v-autocomplete v-model="keyboard" @update:modelValue="loadDefaultKeymap" clearable density="compact" label="Default Keymap..." :items="keyboard_list ?? []" />
+      <v-autocomplete v-model="keyboard" @update:modelValue="loadDefaultKeymap" autocomplete="off" hide-details clearable density="compact" label="Default Keymap..." :items="keyboard_list ?? []" />
   
       <v-spacer/>
       
-      <v-btn-group class="mb-4" variant="tonal" density="compact" divided>
+      <v-btn-group variant="tonal" density="compact" divided>
         <v-btn @click="importKeymap">
           <v-icon>fa-solid fa-upload</v-icon>
         </v-btn>
