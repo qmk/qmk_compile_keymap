@@ -52,7 +52,6 @@ const importKeymap = () => {
   const i = document.createElement("input");
   i.type = "file";
   i.accept = ".json";
-  // eslint-disable-next-line func-names
   i.onchange = function (event: Event) {
     const files = (event.target as HTMLInputElement).files;
     if (!files || !files.length) {
@@ -73,8 +72,7 @@ const importKeymap = () => {
 
 const exportKeymap = () => {
   const km_str = JSON.stringify(keymap.value, null, 4);
-  console.log(km_str);
-  var blob = new Blob([km_str], { type: "text/plain;charset=utf-8" });
+  const blob = new Blob([km_str], { type: "text/plain;charset=utf-8" });
 
   saveAs(blob, "keymap.json");
 };

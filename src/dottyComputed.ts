@@ -1,6 +1,6 @@
 import { computed, Ref } from "vue";
 
-export const dottyComputed = (ref: Ref, path: string, def: any = false) => {
+export const dottyComputed = (ref: Ref, path: string, def: unknown = false) => {
   const parts = path.split(".");
   const key: string = parts.pop() as string;
 
@@ -30,7 +30,7 @@ export const dottyComputed = (ref: Ref, path: string, def: any = false) => {
         cur[key] = val;
       } else {
         try {
-          let parents = [ref.value];
+          const parents = [ref.value];
           for (const part of parts) {
             parents.push(parents[parents.length - 1][part]);
           }

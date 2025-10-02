@@ -12,7 +12,7 @@ export type Keymap = {
 
     layers:string[][];
 
-    config?: any;
+    config?: unknown;
 
     converter?: string;
 
