@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@guolao/vue-monaco-editor": "^1.5.5",
-    "@vueuse/core": "^13.9.0",
+    "@vueuse/core": "^14.4.0",
     "core-js": "^3.45.1",
     "file-saver": "^2.0.5",
     "roboto-fontface": "*",
